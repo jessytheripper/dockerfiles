@@ -32,7 +32,7 @@ First, you need to create the mountpoint used by the docker volume (I use /home/
 
 Run the container using root or sudo:
 ```
-docker run -e STEAM_LOGIN='your_steam_login' -e STEAM_PASSWORD='your_steam_password' -p 2302:2302 -v /home/steam:/home/steam -d -t arma3server
+docker run -e STEAM_LOGIN='your_steam_login' -e STEAM_PASSWORD='your_steam_password' -p 0.0.0.0:2302:2302/udp -v /home/steam:/home/steam -d -t arma3server
 ```
 
 ## Customizing server.cfg

@@ -9,6 +9,7 @@ USER steam
 
 VOLUME ["/home/steam/"]
 ADD start.sh /start.sh
+ADD server.cfg /tmp/server.cfg
 
 EXPOSE 2302/udp
 
