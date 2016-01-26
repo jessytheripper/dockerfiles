@@ -30,7 +30,12 @@ if [ -z ${ARMA3_SERVER_CFG+x} ]; then
   cp /tmp/server.cfg $STEAMCMD/arma3/server.cfg
 else
   echo "Using custom server.cfg..."
-  wget -O $STEAMCMD/arma3/server.cfg $ARMA3_SERVER_CFG
+  $WGET_BIN -O $STEAMCMD/arma3/server.cfg $ARMA3_SERVER_CFG
+  local STATUS=$?
+  if [ $STATUS -ne 0 ]; then
+    echo "Unable to fetch server.cfg from remote, falling back to default server.cfg..."
+    cp /tmp/server.cfg $STEAMCMD/arma3/server.cfg
+  fi
 fi
 
 ADMIN_PASSWORD=$(grep passwordAdmin $STEAMCMD/arma3/server.cfg | cut -f2 -d'"')
