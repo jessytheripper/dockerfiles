@@ -37,7 +37,18 @@ docker run -e STEAM_LOGIN='your_steam_login' -e STEAM_PASSWORD='your_steam_passw
 
 ## Customizing server.cfg
 
-For now, Arma 3 server.cfg is generated in start.sh. This is just a "vanilla" release, I will probably make it as an environment variable (pointing to a URL for example) in the future.
+In this vanilla version, Arma 3 server.cfg is a basic configuration file. You need to define $ARMA3_SERVER_CFG to overload its behavior.
+
+## Running Mods
+
+To create a new image running a specific mod:
+- create an image based on this one.
+- add a script setting up things for the mod (ADD mymod.sh /tmp/mymod.sh)
+- declare $MOD_SCRIPT pointing to the setup script (ENV MOD_SCRIPT /tmp/mymod.sh)
+- overload server.cfg by adding yours (ADD server.cfg /tmp/server.cfg)
+- install needed services (i.e. MySQL,...)
+
+As soon as AltisLife image is pushed, you'll got an example.
 
 ## Logging
 

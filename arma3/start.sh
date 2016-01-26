@@ -1,6 +1,7 @@
 #!/bin/bash
 
-STEAMCMD="/home/steam/steamcmd"
+STEAM_VOLUME="/home/steam"
+STEAMCMD="$STEAM_VOLUME/steamcmd"
 ARMA3_INST="$STEAMCMD/arma3_inst.txt"
 WGET_BIN=$(command -v wget)
 TAR_BIN=$(command -v tar)
@@ -43,5 +44,18 @@ SERVER_COMMAND_PASSWORD=$(grep serverCommandPassword $STEAMCMD/arma3/server.cfg 
 
 echo "admin password: $ADMIN_PASSWORD"
 echo "server command password: $SERVER_COMMAND_PASSWORD"
+
+#######################################################
+# This is the mod specific part. Anyone can overwrite
+# This file to configure a specific mod in top of this 
+# Arma3 Docker image. 
+# You just need to define $MOD_SCRIPT when running and 
+# add it to the image build.
+
+if [ ! -z ${MOD_SCRIPT+x} ] && [ -f $MOD_SCRIPT ]; then
+  echo "Launching $MOD_SCRIPT to setup mod for this instance"
+  /bin/bash $MOD_SCRIPT
+fi
+#######################################################
 
 cd $STEAMCMD/arma3/ && ./arma3server -name=public -config=server.cfg
