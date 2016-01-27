@@ -55,7 +55,7 @@ echo "server command password: $SERVER_COMMAND_PASSWORD"
 if [ ! -z ${MOD_SCRIPT+x} ] && [ -f $MOD_SCRIPT ]; then
   echo "Launching $MOD_SCRIPT to setup mod for this instance"
   /bin/bash $MOD_SCRIPT
-fi
 #######################################################
-
-cd $STEAMCMD/arma3/ && ./arma3server -name=public -config=server.cfg
+else
+  cd $STEAMCMD/arma3/ && ./arma3server -name=public -config=server.cfg
+fi

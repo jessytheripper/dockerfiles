@@ -12,5 +12,7 @@ ADD start.sh /start.sh
 ADD server.cfg /tmp/server.cfg
 
 EXPOSE 2302/udp
+EXPOSE 2303/udp
+EXPOSE 2304/udp
 
 CMD ["/bin/bash", "/start.sh"]
