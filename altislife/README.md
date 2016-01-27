@@ -1,4 +1,4 @@
-Altis Life server Dockerfile
+# Altis Life server Dockerfile
 
 ## Introduction
 
@@ -39,4 +39,4 @@ docker logs <CONTAINER_NAME>
 
 ## Versions
 
-- GNU/Linux Debian Jessie: **8.x*
+- GNU/Linux Debian Jessie: **8.x**
