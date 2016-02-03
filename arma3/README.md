@@ -35,9 +35,13 @@ Run the container using root or sudo:
 docker run -e STEAM_LOGIN='your_steam_login' -e STEAM_PASSWORD='your_steam_password' -p 0.0.0.0:2302:2302/udp -v /home/steam:/home/steam -d -t arma3server
 ```
 
+After the first run, the arma3 won't be touched. To manually tells the container you want to update all ARMA3 data, just declare $ARMA3_UPDATE_DATA on the next container run.
+
 ## Customizing server.cfg
 
 In this vanilla version, Arma 3 server.cfg is a basic configuration file. You need to define $ARMA3_SERVER_CFG to overload its behavior.
+
+You can also define $SERVER_UPDATE_PASSWORD when running the container to generate automatic random password for admin and command. These passwords will be printed into the logs.
 
 ## Running Mods
 

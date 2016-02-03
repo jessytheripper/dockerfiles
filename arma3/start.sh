@@ -22,9 +22,12 @@ EOF
 
 $WGET_BIN -O /tmp/steamcmd_linux.tar.gz https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
 $TAR_BIN --overwrite -xvzf /tmp/steamcmd_linux.tar.gz -C $STEAMCMD
-$STEAMCMD/steamcmd.sh  +runscript $ARMA3_INST
-mkdir -p $HOME/".local/share/Arma 3"
-mkdir -p $HOME/".local/share/Arma 3 - Other Profiles"
+
+if [ ! -z ${ARMA3_UPDATE_DATA+x} ] || [ ! -f $STEAMCMD/arma3/server.cfg ]; then
+  $STEAMCMD/steamcmd.sh  +runscript $ARMA3_INST
+  mkdir -p $HOME/".local/share/Arma 3"
+  mkdir -p $HOME/".local/share/Arma 3 - Other Profiles"
+fi
 
 if [ -z ${ARMA3_SERVER_CFG+x} ]; then
   echo "Using the default server.cfg..."
@@ -39,8 +42,15 @@ else
   fi
 fi
 
-ADMIN_PASSWORD=$(grep passwordAdmin $STEAMCMD/arma3/server.cfg | cut -f2 -d'"')
-SERVER_COMMAND_PASSWORD=$(grep serverCommandPassword $STEAMCMD/arma3/server.cfg | cut -f2 -d'"')
+if [ ! -z ${SERVER_UPDATE_PASSWORD+x} ]; then
+  ADMIN_PASSWORD=$(cat /dev/urandom| tr -dc 'a-zA-Z0-9!#' | fold -w 15 | head -1)
+  SERVER_COMMAND_PASSWORD=$(cat /dev/urandom| tr -dc 'a-zA-Z0-9!#' | fold -w 15 | head -1)
+  sed -i "s/passwordAdmin.*/passwordAdmin = \"$ADMIN_PASSWORD\";/g" $STEAMCMD/arma3/server.cfg
+  sed -i "s/serverCommandPassword.*/serverCommandPassword = \"$SERVER_COMMAND_PASSWORD\";/g" $STEAMCMD/arma3/server.cfg
+else
+  ADMIN_PASSWORD=$(grep passwordAdmin $STEAMCMD/arma3/server.cfg | cut -f2 -d'"')
+  SERVER_COMMAND_PASSWORD=$(grep serverCommandPassword $STEAMCMD/arma3/server.cfg | cut -f2 -d'"')
+fi
 
 echo "admin password: $ADMIN_PASSWORD"
 echo "server command password: $SERVER_COMMAND_PASSWORD"
