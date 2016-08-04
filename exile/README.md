@@ -37,6 +37,15 @@ All logs print out in stdout/stderr and are available via the docker logs comman
 docker logs <CONTAINER_NAME>
 ```
 
+## Tweaking
+
+config.cfg loads by default New Tanoa map. You can modify template using either Exile.Namalsk, Exile.Altis or Exile.Tanoa as value.
+
+## Production
+
+This docker image is aim to speed-up the install and deployment process for Arma3/Exilemod server. It means you just have a working server instance no more, no less.
+*If you want to use it in production, you need to configure battleye / steamapi (security things).* You also need to make sure every configuration variables are set as you except.
+
 ## Versions
 
 - GNU/Linux Debian Jessie: **8.x**
