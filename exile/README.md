@@ -17,7 +17,7 @@ docker build -t exile .
 ```
 ## Running
 
-Exile Mod needs a MySQL database to store persistent data of the world. Instead of embedding a MySQL server in the same container (which is, btw, ugly), we use a prebuild image available in the docker library (pull action). To do this, we use the image named centurylink/mysql. You just need to execute the lines below (but first, fill a password for MySQL and a directory to store MySQL data in your host).
+Exile Mod needs a MySQL database to store persistent data of the world. Instead of embedding a MySQL server in the same container (which is, btw, ugly), we use a prebuild image available in the docker library (pull action). You just need to execute the lines below (but first, fill a password for MySQL and a directory to store MySQL data in your host).
 
 ```
 docker pull mysql/mysql-server:5.6
